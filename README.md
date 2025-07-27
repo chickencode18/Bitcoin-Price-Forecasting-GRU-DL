@@ -43,7 +43,9 @@ After training on 365 days of Bitcoin data:
 [Demo](https://bitcoin-price-forecasting-gru-dl-s4bnv4ktidpbcqnrlniskg.streamlit.app/)
 ---
 
+---
 📬 Contact
 Nguyễn Võ Đăng Khoa
 📧 [dangkhoa18205@gmail.com](mailto:dangkhoa18205@gmail.com)
 🔗 [LinkedIn Profile](https://www.linkedin.com/in/%C4%91%C4%83ng-khoa-nguy%E1%BB%85n-v%C3%B5-9067aa36a/)
+---
