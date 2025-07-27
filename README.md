@@ -37,3 +37,8 @@ After training on 365 days of Bitcoin data:
 ### 📈 Visualization:
 ![Predicted vs Actual](output/predicted_vs_actual.png)
 ![Loss Curve](output/loss_curve.jpg)
+
+---
+### Demo
+[Demo](https://bitcoin-price-forecasting-gru-dl-s4bnv4ktidpbcqnrlniskg.streamlit.app/)
+---
