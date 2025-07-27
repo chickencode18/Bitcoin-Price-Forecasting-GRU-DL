@@ -28,16 +28,12 @@ df.set_index("Date", inplace=True)
 scaler = MinMaxScaler()
 scaled_data = scaler.fit_transform(df[["price"]])
 
-
 SEQ_LEN = 10
 x_all, y_all = create_sequences(scaled_data, SEQ_LEN)
-
 
 split_idx = int(len(x_all) * 0.8)
 x_train, x_test = x_all[:split_idx], x_all[split_idx:]
 y_train, y_test = y_all[:split_idx], y_all[split_idx:]
-
-
 
 model = Sequential()
 model.add(GRU(54, activation='tanh', input_shape=(SEQ_LEN, 1)))
@@ -45,7 +41,6 @@ model.add(GRU(54, activation='tanh', input_shape=(SEQ_LEN, 1)))
 # model.add(GRU(32))
 model.add(Dense(1))
 model.compile(optimizer='adam', loss='mse')
-
 
 checkpoint = ModelCheckpoint(
     filepath='model2.h5',
@@ -73,34 +68,28 @@ mae = mean_absolute_error(y_test_inv, y_pred_inv)
 rmse = np.sqrt(mean_squared_error(y_test_inv, y_pred_inv))
 r2 = r2_score(y_test_inv, y_pred_inv)
 
-print("\n==== Kết quả dự báo ====")
+print("\n==== Prediction Result ====")
 print("MAE :", round(mae, 2))
 print("RMSE:", round(rmse, 2))
 print("R²   :", round(r2, 4))
 
-# =========================
-# 9. Vẽ biểu đồ giá thực tế vs dự đoán
-# =========================
 plt.figure(figsize=(10, 5))
-plt.plot(df.index[-len(y_test):], y_test_inv, label='Giá thực tế')
-plt.plot(df.index[-len(y_test):], y_pred_inv, label='Dự báo (GRU)', linestyle='--', color='orange')
-plt.xlabel("Ngày")
-plt.ylabel("Giá Bitcoin (USD)")
-plt.title("Dự báo giá Bitcoin bằng GRU (Best Model)")
+plt.plot(df.index[-len(y_test):], y_test_inv, label='Actual Price')
+plt.plot(df.index[-len(y_test):], y_pred_inv, label='Predicted Price (GRU)', linestyle='--', color='orange')
+plt.xlabel("Date")
+plt.ylabel("Bitcoin Price (USD)")
+plt.title("Bitcoin Price Prediction with GRU (Best Model)")
 plt.legend()
 plt.tight_layout()
 plt.grid(True)
 plt.show()
 
-# =========================
-# 10. Vẽ biểu đồ Loss huấn luyện
-# =========================
 plt.figure(figsize=(8, 4))
 plt.plot(history.history['loss'], label='Train Loss')
 plt.plot(history.history['val_loss'], label='Validation Loss', linestyle='--')
 plt.xlabel("Epoch")
 plt.ylabel("Loss (MSE)")
-plt.title("Biểu đồ Loss theo Epoch")
+plt.title("Loss Curve per Epoch")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
